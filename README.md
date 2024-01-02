@@ -18,4 +18,4 @@ This documentation outlines the functionality and implementation details of a PH
 2. For `cat_2` and `cat_3` there is only one.
 
 ## Preview
-![Preview](/EasyMail/public/app_preview.png)
+![Preview](public/app_preview.png)
