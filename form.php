@@ -1,25 +1,42 @@
 <?php
 require dirname(__DIR__) . "/EasyMail/src/partials/header.php";
-
 require dirname(__DIR__) . "/EasyMail/src/db/query.php";
 $categories = getCategories();
 ?>
-<form method="POST" enctype="multipart/form-data" action="app.php">
-    <div class="form-group">
-        <label for="categories">Choose category to send appropriate users email</label>
-        <select class="form-control" id="categories" name="selectedCategory">
-            <?php foreach ($categories as $category) : ?>
-                <option value="<?php echo $category["category_id"] ?>"><?php echo $category["category_name"] ?></option>
-            <?php endforeach ?>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="message">Message</label>
-        <textarea class="form-control" id="message" name="message" placeholder="Type your message here"></textarea>
-    </div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h1>Provide message</h1>
+        </div>
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data" action="app.php">
+                <div class="form-group">
+                    <label for="categories">Choose category to send appropriate users email</label>
+                    <select class="form-control" id="categories" name="selectedCategory">
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?php echo $category["category_id"] ?>"><?php echo $category["category_name"] ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Type subject here"></input>
+                </div>
+                <div class="form-group">
+                    <label for="alt">Alt message</label>
+                    <input type="text" class="form-control" id="alt" name="alt" placeholder="Type alt here"></input>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea class="form-control" id="message" name="message" placeholder="Type your message here"></textarea>
+                </div>
 
-    <button type="submit" class="btn btn-primary">Send</button>
-</form>
+                <button type="submit" class="btn btn-success btn-lg btn-block mx-auto w-50">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 
 
 <?php require dirname(__DIR__) . "/EasyMail/src/partials/footer.php" ?>

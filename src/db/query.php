@@ -84,14 +84,11 @@ function assignUserToCategories($userId, $categoriesToAssign)
 // 
 // assignUserToCategories($userToAssign, $categoriesToAssign);
 
-function getUsers($ids)
+function getAllUsers()
 {
     global $conn;
 
-    $sanitizedIds = implode(',', array_map('intval', $ids));
-
-    $sql = "SELECT * FROM `users` WHERE user_id IN ($sanitizedIds)";
-
+    $sql = "SELECT * FROM `users`";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -100,6 +97,40 @@ function getUsers($ids)
         die("Error fetching users: " . mysqli_error($conn));
     }
 }
+function getUsersByCategory($cat)
+{
+    global $conn;
+
+    $cat = intval($cat);
+
+    $categoryQuery = "SELECT user_id FROM `user_categories` WHERE category_id=$cat";
+    $categoryResult = mysqli_query($conn, $categoryQuery);
+
+    if (!$categoryResult) {
+        die("Error fetching users by category: " . mysqli_error($conn));
+    }
+
+    $userIDs = mysqli_fetch_all($categoryResult, MYSQLI_ASSOC);
+
+    if (empty($userIDs)) {
+        return [];
+    }
+
+    $userIDs = array_column($userIDs, 'user_id');
+
+    // Get user details for the retrieved user IDs
+    $sanitizedIds = implode(',', array_map('intval', $userIDs));
+    $userQuery = empty($sanitizedIds) ? "SELECT * FROM `users`" : "SELECT * FROM `users` WHERE user_id IN ($sanitizedIds)";
+    $userResult = mysqli_query($conn, $userQuery);
+
+    if (!$userResult) {
+        die("Error fetching users: " . mysqli_error($conn));
+    }
+
+    return mysqli_fetch_all($userResult, MYSQLI_ASSOC);
+}
+
+
 function getCategories()
 {
     global $conn;
@@ -111,22 +142,5 @@ function getCategories()
         return mysqli_fetch_all($result, MYSQLI_ASSOC);
     } else {
         die("Error fetching users: " . mysqli_error($conn));
-    }
-}
-
-function getUsersByCategory($cat)
-{
-    global $conn;
-
-    $sql = "SELECT user_id FROM `user_categories` WHERE category_id=$cat";
-    $result = mysqli_query($conn, $sql);
-
-    if ($result) {
-        $userRows = mysqli_fetch_all($result, MYSQLI_ASSOC);
-        $userIDs = array_column($userRows, 'user_id');
-
-        return getUsers($userIDs);
-    } else {
-        die("Error fetching users by category: " . mysqli_error($conn));
     }
 }

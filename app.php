@@ -19,30 +19,27 @@ try {
     $mail->Password  = $config["smtp_password"];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = $config["smtp_port"];
-
     $mail->setFrom($config["smtp_username"], "Easy Mail");
-
-    // $users = createCategory();
-    // $users = getUsers();
-    // $message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc efficitur non sem non sodales. Ut tristique, turpis vel mattis blandit, mi ante consequat dolor, non posuere diam enim nec nisl. Pellentesque varius tortor in purus lacinia, dapibus ornare enim sodales.";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $users = getUsersByCategory($_POST["selectedCategory"]);
         $message = $_POST["message"];
+        $subject = $_POST["subject"];
+        $alt = $_POST["alt"];
         foreach($users as $user){
             $mail->addAddress($user["email"], $user["name"]);
 
             ob_start();
             include dirname(__DIR__) . "/EasyMail/src/template/mail.php";
             $mail->Body = ob_get_clean();
+
             $mail->isHTML(true);
-            $mail->Subject = "Here is the subject";
-            $mail->AltBody = "This is the body in plain text for non-HTML mail clients";
+            $mail->Subject = $subject;
+            $mail->AltBody = $alt;
             $mail->send();
+
+            header("Location: msgSended.php");
         }
-
-
-        echo "Message has been sent";
     }
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
