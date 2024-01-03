@@ -1,6 +1,6 @@
 <?php
-require dirname(__DIR__) . "/EasyMail/src/partials/header.php";
-require dirname(__DIR__) . "/EasyMail/src/db/query.php";
+require dirname(__DIR__) . "/partials/header.php";
+require dirname(__DIR__) . "/db/query.php";
 $categories = getCategories();
 ?>
 <div class="container">
@@ -9,7 +9,7 @@ $categories = getCategories();
             <h1>Provide message</h1>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="app.php">
+            <form method="POST" enctype="multipart/form-data" action="../app.php">
                 <div class="form-group">
                     <label for="categories">Choose category to send appropriate users email</label>
                     <select class="form-control" id="categories" name="selectedCategory">
@@ -20,23 +20,25 @@ $categories = getCategories();
                 </div>
                 <div class="form-group">
                     <label for="subject">Subject</label>
-                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Type subject here"></input>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="Type subject here" required></input>
                 </div>
                 <div class="form-group">
                     <label for="alt">Alt message</label>
-                    <input type="text" class="form-control" id="alt" name="alt" placeholder="Type alt here"></input>
+                    <input type="text" class="form-control" id="alt" name="alt" placeholder="Type alt here" required></input>
+
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea class="form-control" id="message" name="message" placeholder="Type your message here"></textarea>
-                </div>
+                    <textarea class="form-control" id="message" name="message" placeholder="Type your message here" required></textarea>
 
+                </div>
                 <button type="submit" class="btn btn-success btn-lg btn-block mx-auto w-50">Send</button>
             </form>
+            <?php include dirname(__DIR__) . "/partials/backBtn.html" ?>
         </div>
     </div>
 </div>
 
 
 
-<?php require dirname(__DIR__) . "/EasyMail/src/partials/footer.php" ?>
+<?php require dirname(__DIR__) . "/partials/footer.php" ?>

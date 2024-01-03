@@ -1,12 +1,12 @@
 <?php
 require dirname(__DIR__) . "/partials/header.php";
 require dirname(__DIR__) . "/db/query.php";
-$categories = getCategories();
+$users = getAllUsers();
 ?>
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h1>All available categories:</h1>
+            <h1>All available users:</h1>
         </div>
         <div class="card-body">
             <table class="table">
@@ -14,18 +14,22 @@ $categories = getCategories();
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($categories as $category) : ?>
+                    <?php foreach ($users as $user) : ?>
                         <tr>
-                            <td><?php echo $category["category_id"] ?></td>
-                            <td><?php echo $category["category_name"] ?></td>
+                            <td><?php echo $user["user_id"] ?></td>
+                            <td><?php echo $user["name"] ?></td>
+                            <td><?php echo $user["lastname"] ? $user["lastname"] : "-" ?></td>
+                            <td><?php echo $user["email"] ?></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
             </table>
+            <?php include dirname(__DIR__) . "/partials/backBtn.html" ?>
         </div>
     </div>
-</div>
-<?php require dirname(__DIR__) . "/partials/footer.php" ?>
+    <?php require dirname(__DIR__) . "/partials/footer.php" ?>

@@ -6,7 +6,7 @@ This documentation outlines the functionality and implementation details of a PH
 2. Open XAMPP and run `Apache Web Server` and `MySQL Database`. 
 3. Open an type in the browser `localhost/phpmyadmin`.
 4. Upload `easymail.sql` from src/db folder.
-5. Open `http://localhost/php/projects/EasyMail/form.php` at your browser.
+5. Open `http://localhost/path_to/EasyMail/index.php` at your browser.
 
 ## Usage
 1. Select category from dropdown menu.

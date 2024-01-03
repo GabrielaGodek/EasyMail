@@ -1,45 +1,70 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="x-apple-disable-message-reformatting" />
-  <!--[if !mso]><!-->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!--<![endif]-->
-  <title></title>
+  <title>Email Template</title>
 </head>
 
-<body style="
-      margin: 0;
-      padding: 0;
-      -webkit-text-size-adjust: 100%;
-      background-color: #e7e7e7;
-      color: #000000;
-    ">
-  <table style="max-width: 600px; width:100%; margin: 0 auto; border: 1px solid #000000; background-color: #fafafa;">
+<body style="margin: 0; padding: 0; -webkit-text-size-adjust: 100%; background-color: #f4f4f4; color: #333; font-family: 'Arial', sans-serif;">
+
+  <table style="border-collapse: collapse; max-width: 600px; width: 100%; text-align: center; margin: 0 auto; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
     <tbody>
+      <!-- HEADER -->
       <tr>
         <th>
-          <p style="font-size: 24px; line-height: 28px;">Hello <?php echo htmlspecialchars($user["name"]) . ' ' . htmlspecialchars($user["lastname"]) ?></p>
+          <p style="font-size: 24px; line-height: 28px; margin: 20px 0 10px; color: #155724;">Hello, <?php echo htmlspecialchars($user["name"]) . ' ' . htmlspecialchars($user["lastname"]) ?>!</p>
         </th>
       </tr>
+      <!-- BODY -->
       <tr>
         <td>
           <a href="">
-            <img src="" alt="cta image">
+            <img src="https://raw.githubusercontent.com/GabrielaGodek/EasyMail/main/public/image.jpg" alt="cta image" style="max-width: 100%; height: auto;">
           </a>
         </td>
       </tr>
       <tr>
-        <a style="padding: 10px 20px; background-color: green;" href="">Click here for more</a>
+        <td style="height: 20px;"></td>
       </tr>
       <tr>
         <td>
-          <p style="font-size: 24px; line-height: 28px;">
-            <?php echo htmlspecialchars($message) ?>
+          <a href="" style="display: inline-block; padding: 12px 24px; background-color: #155724; text-align: center; text-decoration: none; color: #fff; font-weight: bold;">Explore More</a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p style="font-size: 18px; line-height: 24px; color: #333; padding: 5px; text-align: justify;"><?php echo htmlspecialchars($message) ?>
           </p>
+        </td>
+      </tr>
+      <!-- FOOTER -->
+      <tr>
+        <td style="height: 10px;"></td>
+      </tr>
+      <tr>
+        <td>
+          <table style="border-collapse: collapse; max-width: 600px; width: 100%;">
+            <tr>
+              <td><a href="" style="padding: 8px 16px; text-decoration: none; background-color: #e7e7e7; color: #333; font-size: 14px;">Contact</a></td>
+              <td><a href="" style="padding: 8px 16px; text-decoration: none; background-color: #e7e7e7; color: #333; font-size: 14px;">Official page</a></td>
+              <td><a href="" style="padding: 8px 16px; text-decoration: none; background-color: #e7e7e7; color: #333; font-size: 14px;">Address</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td style="height: 20px;"></td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size: 12px; color: #777;">Message sent with EasyMail</div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div style="font-size: 12px; color: #777; text-align: justify; line-height: 1.5; padding: 5px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, sapiente officia rerum esse corporis iusto laudantium commodi corrupti cupiditate, magnam animi dolorum cum non beatae. Voluptate dignissimos est quam doloremque? Voluptate dignissimos est quam doloremque?</div>
         </td>
       </tr>
     </tbody>
