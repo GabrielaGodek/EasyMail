@@ -27,12 +27,23 @@
       </tr>
       <tr>
         <td>
+          <a href="">
+            <img src="" alt="cta image">
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <a style="padding: 10px 20px; background-color: green;" href="">Click here for more</a>
+      </tr>
+      <tr>
+        <td>
           <p style="font-size: 24px; line-height: 28px;">
-            <?php echo $message ?>
+            <?php echo htmlspecialchars($message) ?>
           </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>

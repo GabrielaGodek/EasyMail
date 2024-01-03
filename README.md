@@ -10,7 +10,7 @@ This documentation outlines the functionality and implementation details of a PH
 
 ## Usage
 1. Select category from dropdown menu.
-2. Input the message.
+2. Input the subject, alt message and message.
 3. Click "Send" to dispatch the message to users associated with the selected category.
 
 ### Additional information
@@ -18,9 +18,9 @@ This documentation outlines the functionality and implementation details of a PH
 2. For `cat_2` and `cat_3` there is only one.
 
 ## CRUD Operations
-All function can be found in `/src/db/query.php`
+All functions can be found in `/src/db/query.php`
 
-### getUsersByCategory
+### get users by category
 ```php
 function getUsersByCategory($cat)
 {
