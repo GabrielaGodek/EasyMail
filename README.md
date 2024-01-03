@@ -9,6 +9,12 @@ This documentation outlines the functionality and implementation details of a PH
 5. Open `http://localhost/path_to/EasyMail/index.php` at your browser.
 
 ## Usage
+1. Choose the action:
+    1. Send message.
+    2. View all users
+    3. View all categories
+
+### Send message action
 1. Select category from dropdown menu.
 2. Input the subject, alt message and message.
 3. Click "Send" to dispatch the message to users associated with the selected category.
