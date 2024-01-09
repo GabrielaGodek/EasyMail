@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . "/partials/header.php";
+require dirname(__DIR__) . "/partials/header.html";
 require dirname(__DIR__) . "/db/query.php";
 $categories = getCategories();
 ?>
@@ -29,4 +29,4 @@ $categories = getCategories();
         </div>
     </div>
 </div>
-<?php require dirname(__DIR__) . "/partials/footer.php" ?>
+<?php require dirname(__DIR__) . "/partials/footer.html" ?>

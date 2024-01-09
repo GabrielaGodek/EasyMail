@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . "/partials/header.php";
+require dirname(__DIR__) . "/partials/header.html";
 require dirname(__DIR__) . "/db/query.php";
 $users = getAllUsers();
 ?>
@@ -32,4 +32,4 @@ $users = getAllUsers();
             <?php include dirname(__DIR__) . "/partials/backBtn.html" ?>
         </div>
     </div>
-    <?php require dirname(__DIR__) . "/partials/footer.php" ?>
+    <?php require dirname(__DIR__) . "/partials/footer.html" ?>

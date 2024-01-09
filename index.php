@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . "/EasyMail/src/partials/header.php";
+require dirname(__DIR__) . "/EasyMail/src/partials/header.html";
 // $success = $_GET("success")
 ?>
 <div class="container">
@@ -17,4 +17,4 @@ require dirname(__DIR__) . "/EasyMail/src/partials/header.php";
         <a href="src/views/categories.php" type="button" class="btn btn-info">View all categories</a>
     </div>
 </div>
-<?php require dirname(__DIR__) . "/EasyMail/src/partials/footer.php" ?>
+<?php require dirname(__DIR__) . "/EasyMail/src/partials/footer.html" ?>

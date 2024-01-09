@@ -1,4 +1,4 @@
-<?php require dirname(__DIR__) . "/partials/header.php" ?>
+<?php require dirname(__DIR__) . "/partials/header.html" ?>
 <div class="container">
     <div class="alert alert-danger" role="alert">
         <h3>Message could not be send.</h3>
@@ -6,4 +6,4 @@
     </div>
     <?php include dirname(__DIR__) . "/partials/backBtn.html" ?>
 </div>
-<?php require dirname(__DIR__) . "/partials/footer.php" ?>
+<?php require dirname(__DIR__) . "/partials/footer.html" ?>

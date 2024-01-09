@@ -15,8 +15,8 @@ try {
     $mail->isSMTP();
     $mail->Host = $config["smtp_host"];
     $mail->SMTPAuth = $config["smtp_auth"];
-    $mail->Username  = $config["smtp_username"];
-    $mail->Password  = $config["smtp_password"];
+    $mail->Username = $config["smtp_username"];
+    $mail->Password = $config["smtp_password"];
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->Port = $config["smtp_port"];
     $mail->setFrom($config["smtp_username"], "Easy Mail");
