@@ -3,11 +3,14 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require dirname(__DIR__) . "/PHPMailer/Exception.php";
-require dirname(__DIR__) . "/PHPMailer/PHPMailer.php";
-require dirname(__DIR__) . "/PHPMailer/SMTP.php";
+require dirname(__DIR__) . '/vendor/phpmailer/phpmailer/src/Exception.php';
+require dirname(__DIR__) . '/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require dirname(__DIR__) . '/vendor/phpmailer/phpmailer/src/SMTP.php';
+require dirname(__DIR__) . '/vendor/autoload.php';
+
 require dirname(__DIR__) . "/config.php";
-require dirname(__DIR__) . "/src/db/query.php";
+require dirname(__DIR__) . "/src/db/db_conn.php";
+
 
 $mail = new PHPMailer(true);
 
@@ -22,7 +25,10 @@ try {
     $mail->setFrom($config["smtp_username"], "Easy Mail");
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $users = getUsersByCategory($_POST["selectedCategory"]);
+
+        $conn = openConnection();
+        $users = getUsersByCategory($conn, $_POST["selectedCategory"]);
+        closeConnection($conn);
         $message = $_POST["message"];
         $subject = $_POST["subject"];
         $alt = $_POST["alt"];
@@ -32,7 +38,7 @@ try {
                 $mail->addAddress($user["email"], $user["name"]);
 
                 ob_start();
-                include dirname(__DIR__) . "/src/template/mail.php";
+                include dirname(__DIR__) . "/src/template/mail.html";
                 $mail->Body = ob_get_clean();
 
                 $mail->isHTML(true);
@@ -40,8 +46,8 @@ try {
                 $mail->AltBody = $alt;
                 $mail->send();
 
-                header("Location: ../index.php?success=true");
-            }  
+                header("Location: ../index?success=true");
+            }
         }
     }
 } catch (Exception $e) {

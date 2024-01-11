@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !/src/db/db_conn\.php$
+RewriteCond %{REQUEST_URI} !/src/app\.php$
+
+RewriteCond %{REQUEST_URI} !(\.png|\.jpg|\.webp|\.gif|\.jpeg|\.zip|\.css|\.svg|\.js|\.pdf)$
+
+RewriteRule (.*) routes.php [QSA,L]

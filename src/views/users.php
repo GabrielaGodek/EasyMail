@@ -1,7 +1,10 @@
 <?php
 require dirname(__DIR__) . "/partials/header.html";
-require dirname(__DIR__) . "/db/query.php";
-$users = getAllUsers();
+require dirname(__DIR__) . "/db/db_conn.php";
+
+$conn = openConnection();
+$users = getAllData($conn, 'users');
+closeConnection($conn);
 ?>
 <div class="container">
     <div class="card">
@@ -32,4 +35,6 @@ $users = getAllUsers();
             <?php include dirname(__DIR__) . "/partials/backBtn.html" ?>
         </div>
     </div>
-    <?php require dirname(__DIR__) . "/partials/footer.html" ?>
+</div>
+
+<?php require dirname(__DIR__) . "/partials/footer.html" ?>

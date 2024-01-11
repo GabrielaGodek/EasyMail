@@ -1,7 +1,10 @@
 <?php
 require dirname(__DIR__) . "/partials/header.html";
-require dirname(__DIR__) . "/db/query.php";
-$categories = getCategories();
+require dirname(__DIR__) . "/db/db_conn.php";
+
+$conn = openConnection();
+$categories = getAllData($conn, 'categories');
+closeConnection($conn);
 ?>
 <div class="container">
     <div class="card">

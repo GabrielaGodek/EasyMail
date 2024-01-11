@@ -1,7 +1,10 @@
 <?php
 require dirname(__DIR__) . "/partials/header.html";
-require dirname(__DIR__) . "/db/query.php";
-$categories = getCategories();
+require dirname(__DIR__) . "/db/db_conn.php";
+
+$conn = openConnection();
+$categories = getAllData($conn, 'categories');
+closeConnection($conn);
 ?>
 <div class="container">
     <div class="card">
@@ -9,7 +12,7 @@ $categories = getCategories();
             <h1>Provide message</h1>
         </div>
         <div class="card-body">
-            <form method="POST" enctype="multipart/form-data" action="../app.php">
+            <form method="POST" enctype="multipart/form-data" action="src/app.php">
                 <div class="form-group">
                     <label for="categories">Choose category to send appropriate users email</label>
                     <select class="form-control" id="categories" name="selectedCategory">
