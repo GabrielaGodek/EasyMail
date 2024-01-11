@@ -17,14 +17,20 @@ function closeConnection($conn)
 
 function getAllData($conn, $tableName)
 {
+    $allowedTables = ['users', 'categories', 'user_categories'];
+
+    if (!in_array($tableName, $allowedTables)) {
+        die("Invalid table name: " . htmlspecialchars($tableName));
+    }
     $sql = "SELECT * FROM `$tableName`";
+
+    // Prevent SQL Injection
     $result = $conn->query($sql);
 
-    if ($result) {
-        return $result->fetch_all(MYSQLI_ASSOC);
-    } else {
+    if (!$result) {
         die("Error fetching $tableName: " . $conn->error);
     }
+    return $result->fetch_all(MYSQLI_ASSOC);
 }
 
 
@@ -32,38 +38,17 @@ function getUsersByCategory($conn, $cat)
 {
     $cat = intval($cat);
 
-    $categoryQuery = "SELECT user_id FROM `user_categories` WHERE category_id=?";
-    $categoryStmt = $conn->prepare($categoryQuery);
-    $categoryStmt->bind_param("i", $cat);
-    $categoryStmt->execute();
-    $categoryResult = $categoryStmt->get_result();
+    $sql = "SELECT * FROM `users` WHERE user_id IN (SELECT user_id FROM `user_categories` WHERE category_id = ?)";
 
-    if (!$categoryResult) {
+    // Prevent SQL Injection
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $cat);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (!$result) {
         die("Error fetching users by category: " . $conn->error);
     }
 
-    $userIDs = $categoryResult->fetch_all(MYSQLI_ASSOC);
-
-    if (empty($userIDs)) {
-        return [];
-    }
-
-    $userIDs = array_column($userIDs, 'user_id');
-    $placeholders = implode(',', array_fill(0, count($userIDs), '?'));
-
-    $userQuery = empty($placeholders) ? "SELECT * FROM `users`" : "SELECT * FROM `users` WHERE user_id IN ($placeholders)";
-    $userStmt = $conn->prepare($userQuery);
-
-    if (!empty($placeholders)) {
-        $userStmt->bind_param(str_repeat("i", count($userIDs)), ...$userIDs);
-    }
-
-    $userStmt->execute();
-    $userResult = $userStmt->get_result();
-
-    if (!$userResult) {
-        die("Error fetching users: " . $conn->error);
-    }
-
-    return $userResult->fetch_all(MYSQLI_ASSOC);
+    return $result->fetch_all(MYSQLI_ASSOC);
 }

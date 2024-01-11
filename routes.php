@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/router.php';
-$dirname = dirname($_SERVER["REQUEST_URI"]);
+
+// Encode the URL to replace special characters with percent-encoded values
+$dirname = urlencode(dirname($_SERVER["REQUEST_URI"]));
 
 get($dirname . '/index', '/index.php');
 get($dirname . '/users', '/src/views/users.php');

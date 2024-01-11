@@ -1,5 +1,5 @@
 <?php
-
+// Lib used: https://phprouter.com/
 function get($route, $path_to_include)
 {
 	if ($_SERVER['REQUEST_METHOD'] == 'GET') {

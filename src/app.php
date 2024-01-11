@@ -8,7 +8,7 @@ require dirname(__DIR__) . '/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require dirname(__DIR__) . '/vendor/phpmailer/phpmailer/src/SMTP.php';
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-require dirname(__DIR__) . "/config.php";
+require "./config.php";
 require dirname(__DIR__) . "/src/db/db_conn.php";
 
 
@@ -26,12 +26,15 @@ try {
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+        // Sanitize inputs values
+        $category = filter_input(INPUT_POST, 'selectedCategory', FILTER_SANITIZE_NUMBER_INT);
+        $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        $alt = filter_input(INPUT_POST, 'alt', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
         $conn = openConnection();
-        $users = getUsersByCategory($conn, $_POST["selectedCategory"]);
+        $users = getUsersByCategory($conn, $category);
         closeConnection($conn);
-        $message = $_POST["message"];
-        $subject = $_POST["subject"];
-        $alt = $_POST["alt"];
 
         if (!empty($message) && !empty($subject) && !empty($alt)) {
             foreach ($users as $user) {
