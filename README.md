@@ -1,5 +1,5 @@
 # EasyMail
-This documentation outlines the functionality and implementation details of a PHP program designed to send emails with MySQL integration. The program involves three tables in the database: `users`, `categories`, and `users_categories`.
+The application allows selecting customer groups from the database and sending emails with dynamic values. Secured against XSS, SQL Injection, and Path Traversal through input validation and routing. This documentation outlines the functionality and implementation details of a PHP program designed to send emails with MySQL integration. The program involves three tables in the database: `users`, `categories`, and `users_categories`.
 
 ## Installation
 1. Clone this repo: `https://github.com/GabrielaGodek/EasyMail.git`.
@@ -79,14 +79,6 @@ function getUsersByCategory($conn, $cat)
 
 ### Get all data
 ```php
-/**
- * Retrieves all data from a specified database table.
- *
- * @param mysqli $conn An object representing the database connection (mysqli).
- * @param string $tableName The name of the table from which data should be retrieved.
- *
- * @return array|false Returns an associative array with data if successful. Exits the script in case of an error.
- */
 function getAllData($conn, $tableName)
 {
     $sql = "SELECT * FROM `$tableName`";
